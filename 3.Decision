@@ -1,0 +1,18 @@
+import pandas as pd
+from sklearn.tree import DecisionTreeClassifier
+
+data = [
+['Sunny','Warm','Normal','Strong','Warm','Same','Yes'],
+['Sunny','Warm','High','Strong','Warm','Same','Yes'],
+['Rainy','Cold','High','Strong','Warm','Change','No'],
+['Sunny','Warm','High','Strong','Cool','Change','Yes']
+]
+
+df = pd.DataFrame(data)
+X = pd.get_dummies(df.iloc[:,:-1])
+y = df.iloc[:,-1]
+
+model = DecisionTreeClassifier(criterion='entropy')
+model.fit(X,y)
+
+print("Prediction:", model.predict(X.iloc[[0]])[0])
